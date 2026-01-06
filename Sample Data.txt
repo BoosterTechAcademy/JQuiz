@@ -1,0 +1,425 @@
+1️⃣ Reset Sequences
+
+-- Reset sequences to start from 1
+ALTER SEQUENCE explanation_image_text_explanation_id_seq RESTART WITH 1;
+ALTER SEQUENCE question_image_text_q_image_id_seq RESTART WITH 1;
+
+-- Optional: truncate tables to start fresh
+TRUNCATE TABLE question_image_text RESTART IDENTITY CASCADE;
+TRUNCATE TABLE explanation_image_text RESTART IDENTITY CASCADE;
+
+2️⃣ Insert Explanations
+
+INSERT INTO explanation_image_text
+(explanation_text,
+ explanation_image_url,
+ explanation_video_url,
+ right_answer_image_text,
+ question_type)
+VALUES
+('String objects are immutable in Java.',
+ 'https://cdn.booster.app/explanations/java/string.png',
+ 'https://cdn.booster.app/videos/java/string.mp4',
+ 'String',
+ 'imageToText'),
+
+('int is a primitive data type.',
+ 'https://cdn.booster.app/explanations/java/int.png',
+ 'https://cdn.booster.app/videos/java/int.mp4',
+ 'int',
+ 'imageToText'),
+
+('JVM executes Java bytecode.',
+ 'https://cdn.booster.app/explanations/java/jvm.png',
+ 'https://cdn.booster.app/videos/java/jvm.mp4',
+ 'JVM',
+ 'imageToText'),
+
+('final keyword prevents inheritance.',
+ 'https://cdn.booster.app/explanations/java/final.png',
+ 'https://cdn.booster.app/videos/java/final.mp4',
+ 'final',
+ 'imageToText'),
+
+('ArrayList allows duplicate values.',
+ 'https://cdn.booster.app/explanations/java/arraylist.png',
+ 'https://cdn.booster.app/videos/java/arraylist.mp4',
+ 'ArrayList',
+ 'imageToText'),
+
+('HashMap allows one null key.',
+ 'https://cdn.booster.app/explanations/java/hashmap.png',
+ 'https://cdn.booster.app/videos/java/hashmap.mp4',
+ 'HashMap',
+ 'imageToText'),
+
+('Interface supports multiple inheritance.',
+ 'https://cdn.booster.app/explanations/java/interface.png',
+ 'https://cdn.booster.app/videos/java/interface.mp4',
+ 'Interface',
+ 'imageToText'),
+
+('try-catch handles exceptions.',
+ 'https://cdn.booster.app/explanations/java/trycatch.png',
+ 'https://cdn.booster.app/videos/java/trycatch.mp4',
+ 'try-catch',
+ 'imageToText'),
+
+('start() creates a new thread.',
+ 'https://cdn.booster.app/explanations/java/thread.png',
+ 'https://cdn.booster.app/videos/java/thread.mp4',
+ 'start()',
+ 'imageToText'),
+
+('static belongs to the class.',
+ 'https://cdn.booster.app/explanations/java/static.png',
+ 'https://cdn.booster.app/videos/java/static.mp4',
+ 'Class',
+ 'imageToText');
+
+3️⃣ Insert Questions
+
+INSERT INTO question_image_text
+(image_text,
+ question_image,
+ question_image_text_option_one,
+ question_image_text_option_two,
+ question_image_text_option_three,
+ question_image_text_option_four,
+ question_type,
+ author,
+ right_answer_image_text,
+ explanation_imageid)
+VALUES
+('Which Java class is immutable?',
+ 'https://cdn.booster.app/questions/java/q1.png',
+ 'String', 'StringBuilder', 'ArrayList', 'HashMap',
+ 'imageToText', 'booster', 'String', 1),
+
+('Which is a primitive data type?',
+ 'https://cdn.booster.app/questions/java/q2.png',
+ 'Integer', 'String', 'int', 'Object',
+ 'imageToText', 'booster', 'int', 2),
+
+('Which component executes bytecode?',
+ 'https://cdn.booster.app/questions/java/q3.png',
+ 'JRE', 'JVM', 'JDK', 'Compiler',
+ 'imageToText', 'booster', 'JVM', 3),
+
+('Which keyword prevents inheritance?',
+ 'https://cdn.booster.app/questions/java/q4.png',
+ 'static', 'private', 'final', 'abstract',
+ 'imageToText', 'booster', 'final', 4),
+
+('Which collection allows duplicates?',
+ 'https://cdn.booster.app/questions/java/q5.png',
+ 'Set', 'Map', 'ArrayList', 'TreeSet',
+ 'imageToText', 'booster', 'ArrayList', 5),
+
+('Which Map allows a null key?',
+ 'https://cdn.booster.app/questions/java/q6.png',
+ 'Hashtable', 'HashMap', 'TreeMap', 'ConcurrentMap',
+ 'imageToText', 'booster', 'HashMap', 6),
+
+('Which supports multiple inheritance?',
+ 'https://cdn.booster.app/questions/java/q7.png',
+ 'Class', 'Interface', 'Enum', 'Abstract',
+ 'imageToText', 'booster', 'Interface', 7),
+
+('Which handles exceptions?',
+ 'https://cdn.booster.app/questions/java/q8.png',
+ 'if-else', 'switch', 'try-catch', 'loop',
+ 'imageToText', 'booster', 'try-catch', 8),
+
+('Which method starts a new thread?',
+ 'https://cdn.booster.app/questions/java/q9.png',
+ 'run()', 'start()', 'execute()', 'init()',
+ 'imageToText', 'booster', 'start()', 9),
+
+('static keyword belongs to?',
+ 'https://cdn.booster.app/questions/java/q10.png',
+ 'Object', 'Method', 'Class', 'Instance',
+ 'imageToText', 'booster', 'Class', 10);
+
+Perfect! Let’s do the PostgreSQL insert statements for your textToImage API.
+
+
+Insert Explanations
+
+
+INSERT INTO explanation_image_text
+(explanation_text,
+ explanation_image_url,
+ explanation_video_url,
+ explanation_image_right_answer,
+ question_type)
+VALUES
+('Java String is immutable.',
+ 'https://cdn.booster.app/explanations/java/string.png',
+ 'https://cdn.booster.app/videos/java/string.mp4',
+ 'https://cdn.booster.app/answers/java/string.png',
+ 'textToImage'),
+
+('int is a primitive type.',
+ 'https://cdn.booster.app/explanations/java/int.png',
+ 'https://cdn.booster.app/videos/java/int.mp4',
+ 'https://cdn.booster.app/answers/java/int.png',
+ 'textToImage'),
+
+('JVM executes bytecode.',
+ 'https://cdn.booster.app/explanations/java/jvm.png',
+ 'https://cdn.booster.app/videos/java/jvm.mp4',
+ 'https://cdn.booster.app/answers/java/jvm.png',
+ 'textToImage'),
+
+('final prevents inheritance.',
+ 'https://cdn.booster.app/explanations/java/final.png',
+ 'https://cdn.booster.app/videos/java/final.mp4',
+ 'https://cdn.booster.app/answers/java/final.png',
+ 'textToImage'),
+
+('ArrayList allows duplicates.',
+ 'https://cdn.booster.app/explanations/java/arraylist.png',
+ 'https://cdn.booster.app/videos/java/arraylist.mp4',
+ 'https://cdn.booster.app/answers/java/arraylist.png',
+ 'textToImage'),
+
+('HashMap allows one null key.',
+ 'https://cdn.booster.app/explanations/java/hashmap.png',
+ 'https://cdn.booster.app/videos/java/hashmap.mp4',
+ 'https://cdn.booster.app/answers/java/hashmap.png',
+ 'textToImage'),
+
+('Interface supports multiple inheritance.',
+ 'https://cdn.booster.app/explanations/java/interface.png',
+ 'https://cdn.booster.app/videos/java/interface.mp4',
+ 'https://cdn.booster.app/answers/java/interface.png',
+ 'textToImage'),
+
+('try-catch handles exceptions.',
+ 'https://cdn.booster.app/explanations/java/trycatch.png',
+ 'https://cdn.booster.app/videos/java/trycatch.mp4',
+ 'https://cdn.booster.app/answers/java/trycatch.png',
+ 'textToImage'),
+
+('start() creates a new thread.',
+ 'https://cdn.booster.app/explanations/java/thread.png',
+ 'https://cdn.booster.app/videos/java/thread.mp4',
+ 'https://cdn.booster.app/answers/java/thread.png',
+ 'textToImage'),
+
+('static belongs to class.',
+ 'https://cdn.booster.app/explanations/java/static.png',
+ 'https://cdn.booster.app/videos/java/static.mp4',
+ 'https://cdn.booster.app/answers/java/static.png',
+ 'textToImage');
+
+Insert Questions
+
+INSERT INTO question_image_text
+(image_text,
+ question_image_option_one_url,
+ question_image_option_two_url,
+ question_image_option_three_url,
+ question_image_option_four_url,
+ question_type,
+ author,
+ question_image_right_answer,
+ explanation_imageid)
+VALUES
+('Which Java class is immutable?',
+ 'https://cdn.booster.app/options/java/string.png',
+ 'https://cdn.booster.app/options/java/stringbuilder.png',
+ 'https://cdn.booster.app/options/java/arraylist.png',
+ 'https://cdn.booster.app/options/java/hashmap.png',
+ 'textToImage', 'booster',
+ 'https://cdn.booster.app/answers/java/string.png',
+ 1),
+
+('Which is a primitive data type?',
+ 'https://cdn.booster.app/options/java/integer.png',
+ 'https://cdn.booster.app/options/java/string.png',
+ 'https://cdn.booster.app/options/java/int.png',
+ 'https://cdn.booster.app/options/java/object.png',
+ 'textToImage', 'booster',
+ 'https://cdn.booster.app/answers/java/int.png',
+ 2),
+
+('Which component executes bytecode?',
+ 'https://cdn.booster.app/options/java/jre.png',
+ 'https://cdn.booster.app/options/java/jvm.png',
+ 'https://cdn.booster.app/options/java/jdk.png',
+ 'https://cdn.booster.app/options/java/compiler.png',
+ 'textToImage', 'booster',
+ 'https://cdn.booster.app/answers/java/jvm.png',
+ 3),
+
+('Which keyword prevents inheritance?',
+ 'https://cdn.booster.app/options/java/static.png',
+ 'https://cdn.booster.app/options/java/private.png',
+ 'https://cdn.booster.app/options/java/final.png',
+ 'https://cdn.booster.app/options/java/abstract.png',
+ 'textToImage', 'booster',
+ 'https://cdn.booster.app/answers/java/final.png',
+ 4),
+
+('Which collection allows duplicates?',
+ 'https://cdn.booster.app/options/java/set.png',
+ 'https://cdn.booster.app/options/java/map.png',
+ 'https://cdn.booster.app/options/java/arraylist.png',
+ 'https://cdn.booster.app/options/java/treeset.png',
+ 'textToImage', 'booster',
+ 'https://cdn.booster.app/answers/java/arraylist.png',
+ 5),
+
+('Which Map allows a null key?',
+ 'https://cdn.booster.app/options/java/hashtable.png',
+ 'https://cdn.booster.app/options/java/hashmap.png',
+ 'https://cdn.booster.app/options/java/treemap.png',
+ 'https://cdn.booster.app/options/java/concurrentmap.png',
+ 'textToImage', 'booster',
+ 'https://cdn.booster.app/answers/java/hashmap.png',
+ 6),
+
+('Which supports multiple inheritance?',
+ 'https://cdn.booster.app/options/java/class.png',
+ 'https://cdn.booster.app/options/java/interface.png',
+ 'https://cdn.booster.app/options/java/enum.png',
+ 'https://cdn.booster.app/options/java/abstract.png',
+ 'textToImage', 'booster',
+ 'https://cdn.booster.app/answers/java/interface.png',
+ 7),
+
+('Which handles exceptions?',
+ 'https://cdn.booster.app/options/java/ifelse.png',
+ 'https://cdn.booster.app/options/java/switch.png',
+ 'https://cdn.booster.app/options/java/trycatch.png',
+ 'https://cdn.booster.app/options/java/loop.png',
+ 'textToImage', 'booster',
+ 'https://cdn.booster.app/answers/java/trycatch.png',
+ 8),
+
+('Which method starts a new thread?',
+ 'https://cdn.booster.app/options/java/run.png',
+ 'https://cdn.booster.app/options/java/start.png',
+ 'https://cdn.booster.app/options/java/execute.png',
+ 'https://cdn.booster.app/options/java/init.png',
+ 'textToImage', 'booster',
+ 'https://cdn.booster.app/answers/java/start.png',
+ 9),
+
+('static keyword belongs to?',
+ 'https://cdn.booster.app/options/java/object.png',
+ 'https://cdn.booster.app/options/java/method.png',
+ 'https://cdn.booster.app/options/java/class.png',
+ 'https://cdn.booster.app/options/java/instance.png',
+ 'textToImage', 'booster',
+ 'https://cdn.booster.app/answers/java/static.png',
+ 10);
+
+ALTER TABLE question_text
+ALTER COLUMN created_time
+SET DEFAULT (NOW() AT TIME ZONE 'Asia/Kolkata');
+
+ALTER TABLE question_text
+ALTER COLUMN created_day
+SET DEFAULT (
+    UPPER(TRIM(TO_CHAR(NOW() AT TIME ZONE 'Asia/Kolkata', 'Day')))
+);
+
+
+INSERT INTO explanation 
+(explanation_text, explanation_image_url, explanation_video_url, right_answer, question_type)
+VALUES
+('JVM converts bytecode into machine code at runtime.', NULL, NULL, 'JVM', 'JAVA'),
+('JDK contains development tools like compiler and debugger.', NULL, NULL, 'JDK', 'JAVA'),
+('JRE provides libraries and JVM to run Java programs.', NULL, NULL, 'JRE', 'JAVA'),
+('Inheritance enables a class to acquire another class properties.', NULL, NULL, 'Inheritance', 'JAVA'),
+('Polymorphism allows same method name with different behavior.', NULL, NULL, 'Polymorphism', 'JAVA'),
+('Encapsulation protects data using access modifiers.', NULL, NULL, 'Encapsulation', 'JAVA'),
+('Abstraction hides internal implementation details.', NULL, NULL, 'Abstraction', 'JAVA'),
+('Interface supports multiple inheritance in Java.', NULL, NULL, 'Interface', 'JAVA'),
+('try-catch block handles runtime exceptions.', NULL, NULL, 'try-catch', 'JAVA'),
+('Garbage Collector automatically frees unused memory.', NULL, NULL, 'Garbage Collector', 'JAVA');
+
+Insert Questions
+
+INSERT INTO question_text
+(q_text, option_one, option_two, option_three, option_four,
+ right_answer, author, question_type, explanation_id)
+VALUES
+('What is the main function of JVM?',
+ 'Executes bytecode', 'Compiles code', 'Runs OS', 'Manages DB',
+ 'Executes bytecode', 'Vinayak', 'JAVA', 1),
+
+('Which tool is required to compile Java code?',
+ 'JVM', 'JRE', 'JDK', 'JIT',
+ 'JDK', 'Vinayak', 'JAVA', 2),
+
+('Which component is mandatory to run Java applications?',
+ 'JDK', 'JVM', 'JRE', 'IDE',
+ 'JRE', 'Vinayak', 'JAVA', 3),
+
+('Which Java feature supports code reuse?',
+ 'Encapsulation', 'Inheritance', 'Polymorphism', 'Abstraction',
+ 'Inheritance', 'Vinayak', 'JAVA', 4),
+
+('Which concept allows method overriding?',
+ 'Inheritance', 'Encapsulation', 'Polymorphism', 'Abstraction',
+ 'Polymorphism', 'Vinayak', 'JAVA', 5),
+
+('Which feature protects class variables?',
+ 'Inheritance', 'Encapsulation', 'Abstraction', 'Polymorphism',
+ 'Encapsulation', 'Vinayak', 'JAVA', 6),
+
+('Which concept hides implementation logic?',
+ 'Encapsulation', 'Inheritance', 'Polymorphism', 'Abstraction',
+ 'Abstraction', 'Vinayak', 'JAVA', 7),
+
+('Which Java construct allows multiple inheritance?',
+ 'Class', 'Abstract class', 'Interface', 'Object',
+ 'Interface', 'Vinayak', 'JAVA', 8),
+
+('Which block handles exceptions?',
+ 'throw', 'throws', 'try-catch', 'final',
+ 'try-catch', 'Vinayak', 'JAVA', 9),
+
+('Which Java feature clears unused memory?',
+ 'JIT', 'JVM', 'Garbage Collector', 'Heap',
+ 'Garbage Collector', 'Vinayak', 'JAVA', 10);
+
+
+
+We’ll focus on Java fill-in-the-blank questions.
+
+Insert 10 Explanations for Fill-in-the-Blank
+
+INSERT INTO explanation (explanation_text, explanation_image_url, explanation_video_url, right_answer, question_type)
+VALUES
+('In Java, the _____ keyword is used to define a subclass.', NULL, NULL, 'extends', 'FILL_BLANK'),
+('The _____ method is called when an object is created.', NULL, NULL, 'constructor', 'FILL_BLANK'),
+('A _____ is used to handle exceptions in Java.', NULL, NULL, 'try-catch', 'FILL_BLANK'),
+('The _____ keyword is used to declare a constant variable in Java.', NULL, NULL, 'final', 'FILL_BLANK'),
+('In Java, _____ allows a class to have multiple forms of a method.', NULL, NULL, 'polymorphism', 'FILL_BLANK'),
+('The _____ keyword is used to prevent a class from being subclassed.', NULL, NULL, 'final', 'FILL_BLANK'),
+('Java collections like ArrayList implement the _____ interface.', NULL, NULL, 'List', 'FILL_BLANK'),
+('The _____ operator is used to compare object references, not values.', NULL, NULL, '==', 'FILL_BLANK'),
+('The _____ keyword is used to create a new object instance.', NULL, NULL, 'new', 'FILL_BLANK'),
+('A _____ allows a method to be called without creating an instance of a class.', NULL, NULL, 'static', 'FILL_BLANK');
+
+Insert 10 Questions
+
+INSERT INTO question_text
+(q_text, option_one, option_two, option_three, option_four, right_answer, author, question_type, explanation_id)
+VALUES
+('In Java, the _____ keyword is used to define a subclass.', NULL, NULL, NULL, NULL, 'extends', 'Vinayak', 'FILL_BLANK', 1),
+('The _____ method is called when an object is created.', NULL, NULL, NULL, NULL, 'constructor', 'Vinayak', 'FILL_BLANK', 2),
+('A _____ is used to handle exceptions in Java.', NULL, NULL, NULL, NULL, 'try-catch', 'Vinayak', 'FILL_BLANK', 3),
+('The _____ keyword is used to declare a constant variable in Java.', NULL, NULL, NULL, NULL, 'final', 'Vinayak', 'FILL_BLANK', 4),
+('In Java, _____ allows a class to have multiple forms of a method.', NULL, NULL, NULL, NULL, 'polymorphism', 'Vinayak', 'FILL_BLANK', 5),
+('The _____ keyword is used to prevent a class from being subclassed.', NULL, NULL, NULL, NULL, 'final', 'Vinayak', 'FILL_BLANK', 6),
+('Java collections like ArrayList implement the _____ interface.', NULL, NULL, NULL, NULL, 'List', 'Vinayak', 'FILL_BLANK', 7),
+('The _____ operator is used to compare object references, not values.', NULL, NULL, NULL, NULL, '==', 'Vinayak', 'FILL_BLANK', 8),
+('The _____ keyword is used to create a new object instance.', NULL, NULL, NULL, NULL, 'new', 'Vinayak', 'FILL_BLANK', 9),
+('A _____ allows a method to be called without creating an instance of a class.', NULL, NULL, NULL, NULL, 'static', 'Vinayak', 'FILL_BLANK', 10);
+
