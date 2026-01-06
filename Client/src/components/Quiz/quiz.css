@@ -1,0 +1,28 @@
+.result {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.review {
+  border-bottom: 1px solid #ddd;
+  padding: 0.8rem 0;
+}
+
+.correct {
+  color: green;
+  font-weight: bold;
+}
+
+.wrong {
+  color: red;
+  font-weight: bold;
+}
+
+.quiz {
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
